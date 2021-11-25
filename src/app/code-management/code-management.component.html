@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-2">
+      <h4>Codigos</h4>
+    </div>
+    <div class="col-md-12 my-2">
+      <button
+        type="button"
+        class="btn btn-primary"
+         style="margin-right: 5px;"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Generar Codigo
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal2"
+      >
+        Canjear Codigo
+      </button>
+    </div>
+    <div class="col-md-12 mt-2">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Codigo</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of codePromotions; let i = index">
+              <td>
+                {{ i + 1 }}
+              </td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.mail }}</td>
+              <td>
+                {{ item.code }}
+              </td>
+              <td>
+                <span
+                  class="badge"
+                  [class]="item.statusId == 1 ? 'bg-success' : 'bg-warning'"
+                >
+                  {{ item.statusId == 1 ? "Generado" : "Canjeado" }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Codigo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input class="form-control"  required [(ngModel)]="codePromotionCreate.name">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="email" class="form-control" required [(ngModel)]="codePromotionCreate.mail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCerrarModal1"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button [disabled]="isSaving" (click)="createCodePromotions()" type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Canjear Codigo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input class="form-control"  required [(ngModel)]="codePromotionRedeemed.code">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCerrarModal2"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button [disabled]="isSaving" (click)="redeemCode()" type="button" class="btn btn-primary">Canjear</button>
+      </div>
+    </div>
+  </div>
+</div>

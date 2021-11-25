@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
+  rules = [1,2,3,4,5];
   title = 'FrontPagoEfectivo';
 }
